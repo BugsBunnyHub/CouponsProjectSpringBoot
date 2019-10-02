@@ -10,7 +10,7 @@ import javax.validation.constraints.NotBlank;
 import java.sql.Date;
 
 @Entity
-@Table(name = "Coupons", uniqueConstraints =
+@Table(name = "Couponst", uniqueConstraints =
         {@UniqueConstraint(columnNames = "title", name = "uniqueTitleConstraint")})
 @Component
 @Scope("prototype") //can create many coupons
