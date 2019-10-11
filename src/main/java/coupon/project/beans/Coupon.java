@@ -9,8 +9,9 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import java.sql.Date;
 
+
 @Entity
-@Table(name = "Couponst", uniqueConstraints =
+@Table(name = "Coupons", uniqueConstraints =
         {@UniqueConstraint(columnNames = "title", name = "uniqueTitleConstraint")})
 @Component
 @Scope("prototype") //can create many coupons
@@ -21,6 +22,10 @@ public class Coupon {
     @ManyToOne(fetch = FetchType.EAGER)
     private Company companyID;
     @Column
+    /*
+      @Min, @Max works for int @Size works for String/collection
+     * @NotBlank best of all options for empty/invalid input checks
+     */
     @Min(1)
     @Max(16)
     private int amount;
