@@ -6,9 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.stereotype.Component;
 
-public class LoginManger {
     @Component
-    public class LoginManager {
+    public class LoginManger {
 
         @Autowired
         private ConfigurableApplicationContext ctx;
@@ -34,4 +33,4 @@ public class LoginManger {
         }
 
     }
-}
+
