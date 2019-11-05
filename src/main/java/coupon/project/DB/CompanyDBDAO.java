@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class CompanyDBDAO {
@@ -32,8 +33,9 @@ public class CompanyDBDAO {
         return companyRepo.findAll();
     }
 
-    public void findOneCompany(int id) {
-        companyRepo.findById(id);
+    public Company findOneCompany(int id) {
+        Optional<Company> opt = companyRepo.findById(id);
+        return opt.orElse(null);
     }
 
     public Company isCompanyExists(String email, String password) {

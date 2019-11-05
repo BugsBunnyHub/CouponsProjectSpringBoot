@@ -1,5 +1,6 @@
 package coupon.project.DB;
 
+import coupon.project.beans.Coupon;
 import coupon.project.beans.Customer;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +42,10 @@ public class CustomerDBDAO {
 
     public Customer isCustomerEmailExists(String email) {
         return customerRepo.findByEmail(email);
+    }
+
+    public List<Customer> findCustomerByCoupons(Coupon coupon) {
+        return customerRepo.findCustomerByCoupons(coupon);
     }
 }
 

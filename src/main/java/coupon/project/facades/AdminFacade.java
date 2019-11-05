@@ -72,11 +72,9 @@ public class AdminFacade extends ClientFacade {
         return customerDB.isCustomerEmailExists(email);
     }
 
-    public void findCustomer(int id) {
+    public void findCustomerById(int id) {
         customerDB.findOneCustomer(id);
     }
-
-
 
 
 }

@@ -1,9 +1,13 @@
 package coupon.project.DB;
 
+import coupon.project.beans.Company;
 import coupon.project.beans.Coupon;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
+
 
 @Repository
 public class CouponDBDAO {
@@ -32,5 +36,10 @@ public class CouponDBDAO {
     public Coupon getCouponByName(String title) {
         return couponRepo.findCouponByTitle(title);
     }
+
+    public List<Coupon> getCouponByCompany(Company company) {
+        return couponRepo.findCouponByCompanyID(company);
+    }
+
 
 }
