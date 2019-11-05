@@ -2,9 +2,11 @@ package coupon.project.facades;
 
 import coupon.project.beans.Company;
 import coupon.project.beans.Customer;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class AdminFacade extends ClientFacade {
     @Override
     //hard codded login since it's Admin

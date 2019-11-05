@@ -1,7 +1,9 @@
 package coupon.project.facades;
 
 import coupon.project.beans.Customer;
+import org.springframework.stereotype.Service;
 
+@Service
 public class CustomerFacade extends ClientFacade {
     private int customerId;
 
