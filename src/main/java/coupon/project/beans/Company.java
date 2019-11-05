@@ -8,8 +8,6 @@ import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.List;
 
-// TODO Add msg to all @NotBlank on ALL beans
-
 @Entity
 @Table(name = "Companies",
         uniqueConstraints = {@UniqueConstraint(columnNames = "name", name = "uniqueNameConstraint"),
