@@ -49,7 +49,7 @@ public class Coupon {
     public Coupon() {
     }
 
-    public Coupon(@NotBlank Company companyID, @NotBlank int amount, @NotBlank String title, String description, String image, Category category, Date startDate, Date endDate, double price, @NotBlank int enabled) {
+    public Coupon(@NotBlank Company companyID, @NotBlank int amount, @NotBlank String title, String description, String image, Category category, Date startDate, Date endDate, double price) {
         this.companyID = companyID;
         this.amount = amount;
         this.title = title;

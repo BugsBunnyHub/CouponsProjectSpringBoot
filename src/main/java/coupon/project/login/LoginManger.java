@@ -24,7 +24,7 @@ public class LoginManger {
                     throw new LoginFailedException();
 
             case Company:
-                CompanyFacade companyService = ctx.getBean(CompanyFacade.class);
+                CompanyFacade companyService = ctx.getBean("companyFacade2", CompanyFacade.class);
                 if (companyService.login(email, password))
                     return companyService;
                 else

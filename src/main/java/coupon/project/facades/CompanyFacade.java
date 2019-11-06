@@ -3,14 +3,24 @@ package coupon.project.facades;
 import coupon.project.beans.Company;
 import coupon.project.beans.Coupon;
 import coupon.project.beans.Customer;
-import org.springframework.stereotype.Service;
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 //TODO add to all facdes @service
-@Service
+@Component
 public class CompanyFacade extends ClientFacade {
     private int companyId;
+
+    public int getCompanyId() {
+        return companyId;
+    }
+
+    @Bean
+    public CompanyFacade companyFacade2() {
+        return this;
+    }
 
     @Override
     public boolean login(String email, String password) {
@@ -23,15 +33,14 @@ public class CompanyFacade extends ClientFacade {
     }
 
     //add new coupon
-    public void addCoupon(Coupon coupon) throws Exception {
+    public void addCoupon(Coupon coupon) {
         //check if this company has another coupon with the same title
         Company company = companyDB.findOneCompany(this.companyId);
         List<Coupon> companyCoupons = couponDB.getCouponByCompany(company);
 
         for (Coupon companyCoupon : companyCoupons) {
             if (coupon.getTitle().equalsIgnoreCase(companyCoupon.getTitle()))
-                //TODO add custom exception
-                throw new Exception();
+                System.out.println("Coupon is already registered!"); //TODO: Replace
         }
         company.getCoupons().add(coupon);
         companyDB.updateCompany(company);

@@ -16,7 +16,7 @@ import java.util.List;
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int id; // for security better to use UUID.randomUUID() to generate random ID key as String not int
     @NotBlank
     @Column
     private String firstName;

@@ -17,4 +17,6 @@ public interface CouponRepo extends JpaRepository<Coupon, Integer> {
 
     List<Coupon> findCouponByCompanyID(Company company);
 
+    List<Coupon> findAllByAmountIsGreaterThanAndEndDateIsAfter(int amount, Date now);
+
 }

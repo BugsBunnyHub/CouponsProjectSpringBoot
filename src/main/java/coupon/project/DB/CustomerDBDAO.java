@@ -47,5 +47,6 @@ public class CustomerDBDAO {
     public List<Customer> findCustomerByCoupons(Coupon coupon) {
         return customerRepo.findCustomerByCoupons(coupon);
     }
+
 }
 
