@@ -37,11 +37,11 @@ public class CustomerDBDAO {
     }
 
     public Customer isCustomerExists(String name, String password) {
-        return customerRepo.findByEmailAndPassword(name, password);
+        return customerRepo.findCustomerByEmailAndPassword(name, password);
     }
 
     public Customer isCustomerEmailExists(String email) {
-        return customerRepo.findByEmail(email);
+        return customerRepo.findCustomerByEmail(email);
     }
 
     public List<Customer> findCustomerByCoupons(Coupon coupon) {

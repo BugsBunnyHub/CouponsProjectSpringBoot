@@ -8,6 +8,7 @@ import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.List;
 
+//TODO all names to all beans
 @Entity
 @Table(name = "Companies",
         uniqueConstraints = {@UniqueConstraint(columnNames = "name", name = "uniqueNameConstraint"),
@@ -19,13 +20,13 @@ public class Company {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @NotBlank
-    @Column
+    @Column(name = "name")
     private String name;
     @NotBlank
-    @Column
+    @Column(name = "email")
     private String email;
     @NotBlank
-    @Column
+    @Column(name = "password")
     private String password;
     @Column
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)

@@ -39,16 +39,16 @@ public class CompanyDBDAO {
     }
 
     public Company isCompanyExists(String email, String password) {
-        return companyRepo.findByEmailAndPassword(email, password);
+        return companyRepo.findCompanyByEmailAndPassword(email, password);
 
     }
 
     public Company findCompanyByEmail(String email) {
-        return companyRepo.findByEmail(email);
+        return companyRepo.findCompanyByEmail(email);
     }
 
     public Company findCompanyByName(String name) {
-        return companyRepo.findByName(name);
+        return companyRepo.findCompanyByName(name);
 
     }
 

@@ -4,8 +4,6 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import java.sql.Date;
 
@@ -21,28 +19,27 @@ public class Coupon {
     private int id;
     @ManyToOne(fetch = FetchType.EAGER)
     private Company companyID;
-    @Column
+    @Column(name = "amount")
     /*
       @Min, @Max works for int @Size works for String/collection
      * @NotBlank best of all options for empty/invalid input checks
      */
-    @Min(1)
-    @Max(16)
+    //TODO add @min/@max to passwords
     private int amount;
     @NotBlank
-    @Column
+    @Column(name = "title")
     private String title;
-    @Column
+    @Column(name = "description")
     private String description;
-    @Column
+    @Column(name = "image")
     private String image;
-    @Column
+    @Column(name = "category")
     private Category category;
-    @Column
+    @Column(name = "startDate")
     private Date startDate;
-    @Column
+    @Column(name = "endDate")
     private Date endDate;
-    @Column
+    @Column(name = "price")
     private double price;
 
     //empty con for hibernate

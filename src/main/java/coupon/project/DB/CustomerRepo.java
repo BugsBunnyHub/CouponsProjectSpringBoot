@@ -8,9 +8,9 @@ import java.util.List;
 
 public interface CustomerRepo extends JpaRepository<Customer, Integer> {
 
-    Customer findByEmailAndPassword(String email, String password);
+    Customer findCustomerByEmailAndPassword(String email, String password);
 
-    Customer findByEmail(String email);
+    Customer findCustomerByEmail(String email);
 
     List<Customer> findCustomerByCoupons(Coupon coupon);
 
