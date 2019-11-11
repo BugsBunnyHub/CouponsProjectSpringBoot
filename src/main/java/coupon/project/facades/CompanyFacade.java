@@ -3,7 +3,6 @@ package coupon.project.facades;
 import coupon.project.beans.Company;
 import coupon.project.beans.Coupon;
 import coupon.project.beans.Customer;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -15,11 +14,6 @@ public class CompanyFacade extends ClientFacade {
 
     public int getCompanyId() {
         return companyId;
-    }
-
-    @Bean
-    public CompanyFacade companyFacade2() {
-        return this;
     }
 
     @Override
