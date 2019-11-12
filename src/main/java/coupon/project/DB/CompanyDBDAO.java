@@ -16,7 +16,7 @@ public class CompanyDBDAO {
     private CompanyRepo companyRepo;
 
     public void addCompany(Company company) {
-        companyRepo.save(company);
+        this.companyRepo.save(company);
     }
 
     public void updateCompany(@NotNull Company company) {

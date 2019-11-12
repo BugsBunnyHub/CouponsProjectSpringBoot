@@ -27,19 +27,19 @@ public class Coupon {
     //TODO add @min/@max to passwords
     private int amount;
     @NotBlank
-    @Column(name = "title")
+    @Column
     private String title;
-    @Column(name = "description")
+    @Column
     private String description;
-    @Column(name = "image")
+    @Column
     private String image;
-    @Column(name = "category")
+    @Column
     private Category category;
-    @Column(name = "startDate")
+    @Column
     private Date startDate;
-    @Column(name = "endDate")
+    @Column
     private Date endDate;
-    @Column(name = "price")
+    @Column
     private double price;
 
     //empty con for hibernate

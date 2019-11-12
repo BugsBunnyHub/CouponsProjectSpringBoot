@@ -20,13 +20,13 @@ public class Company {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @NotBlank
-    @Column(name = "name")
+    @Column
     private String name;
     @NotBlank
-    @Column(name = "email")
+    @Column
     private String email;
     @NotBlank
-    @Column(name = "password")
+    @Column
     private String password;
     @Column
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)

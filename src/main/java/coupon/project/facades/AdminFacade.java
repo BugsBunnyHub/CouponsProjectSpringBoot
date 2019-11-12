@@ -1,5 +1,6 @@
 package coupon.project.facades;
 
+import coupon.project.Exceptions.CompanyExistsException;
 import coupon.project.beans.Company;
 import coupon.project.beans.Customer;
 import org.springframework.stereotype.Service;
@@ -15,7 +16,7 @@ public class AdminFacade extends ClientFacade {
     }
 
     // Company methods
-    public void addCompany(Company company) {
+    public void addCompany(Company company) throws CompanyExistsException {
         companyDB.addCompany(company);
     }
 

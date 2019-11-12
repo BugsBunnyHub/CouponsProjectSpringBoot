@@ -18,16 +18,16 @@ public class Customer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id; // for security better to use UUID.randomUUID() to generate random ID key as String not int
     @NotBlank
-    @Column(name = "firstName")
+    @Column
     private String firstName;
     @NotBlank
-    @Column(name = "lastName")
+    @Column
     private String lastName;
     @NotBlank
-    @Column(name = "email")
+    @Column
     private String email;
     @NotBlank
-    @Column(name = "password")
+    @Column
     private String password;
     @Column
     @OneToMany(fetch = FetchType.EAGER)
