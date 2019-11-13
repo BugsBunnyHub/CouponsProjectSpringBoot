@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @Repository
@@ -29,8 +30,9 @@ public class CouponDBDAO {
 
     }
 
-    public void getOneCoupon(int id) {
-        couponRepo.findById(id);
+    public Coupon getOneCoupon(int id) {
+        Optional<Coupon> couponOptional = couponRepo.findById(id);
+        return couponOptional.orElse(null);
     }
 
     public Coupon getCouponByName(String title) {

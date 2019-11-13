@@ -3,12 +3,11 @@ package coupon.project.facades;
 import coupon.project.beans.Company;
 import coupon.project.beans.Coupon;
 import coupon.project.beans.Customer;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-//TODO add to all facdes @service
-@Component
+@Service
 public class CompanyFacade extends ClientFacade {
     private int companyId;
 
@@ -40,14 +39,25 @@ public class CompanyFacade extends ClientFacade {
         companyDB.updateCompany(company);
     }
 
-    //delete coupon for all customers that have that coupon
-    public void deleteCoupon(Coupon coupon) {
-        List<Customer> customers = customerDB.findCustomerByCoupons(coupon);
+    public void deleteCoupon(int couponId) {
+        Coupon couponToDelete = couponDB.getOneCoupon(couponId);
+        Company comp = couponToDelete.getCompanyID();
+        comp.removeCoupon(couponToDelete);
+
+        List<Customer> customers = customerDB.getAllCustomers();
         for (Customer customer : customers) {
-            customer.getCoupons().remove(coupon);
+            customer.getCoupons().remove(couponToDelete);
             customerDB.updateCustomer(customer);
         }
     }
+//    //delete coupon for all customers that have that coupon
+//    public void deleteCoupon(Coupon coupon) {
+//        List<Customer> customers = customerDB.findCustomerByCoupons(coupon);
+//        for (Customer customer : customers) {
+//            customer.getCoupons().remove(coupon);
+//            customerDB.updateCustomer(customer);
+//        }
+//    }
 
     public void updateCoupon(Coupon coupon) {
         couponDB.updateCoupon(coupon);

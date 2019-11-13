@@ -94,6 +94,10 @@ public class Company {
         this.coupons = coupons;
     }
 
+    public void removeCoupon(Coupon coupon) {
+        this.coupons.remove(coupon);
+    }
+
     @Override
     public String toString() {
         return "Company{" +
