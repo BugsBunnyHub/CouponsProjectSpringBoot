@@ -26,19 +26,19 @@ public class Coupon {
      */
     private int amount;
     @NotBlank
-    @Column(unique = true)
+    @Column(name = "title", unique = true)
     private String title;
-    @Column
+    @Column(name = "description")
     private String description;
-    @Column
+    @Column(name = "image")
     private String image;
-    @Column
+    @Column(name = "category")
     private Category category;
-    @Column
+    @Column(name = "startDate")
     private Date startDate;
-    @Column
+    @Column(name = "endDate")
     private Date endDate;
-    @Column
+    @Column(name = "price")
     private double price;
 
     //empty con for hibernate

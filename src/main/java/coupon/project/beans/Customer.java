@@ -4,6 +4,8 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,16 +20,18 @@ public class Customer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id; // for security better to use UUID.randomUUID() to generate random ID key as String not int
     @NotBlank
-    @Column
+    @Column(name = "firstName")
     private String firstName;
     @NotBlank
-    @Column
+    @Column(name = "lastName")
     private String lastName;
     @NotBlank
-    @Column(unique = true)
+    @Column(name = "email", unique = true)
     private String email;
     @NotBlank
-    @Column
+    @Column(name = "password")
+    @Min(value = 6)
+    @Max(value = 16)
     private String password;
     @Column
     @OneToMany(fetch = FetchType.EAGER)

@@ -21,13 +21,13 @@ public class Company {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @NotBlank
-    @Column(unique = true) //can be used as a shortcut for UniqueConstraint
+    @Column(name = "name", unique = true) //can be used as a shortcut for UniqueConstraint
     private String name;
     @NotBlank
-    @Column(unique = true)
+    @Column(name = "name", unique = true)
     private String email;
     @NotBlank
-    @Column
+    @Column(name = "password")
     private String password;
     @Column
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
