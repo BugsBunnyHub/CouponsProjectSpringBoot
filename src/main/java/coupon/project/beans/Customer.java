@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "Customers", uniqueConstraints =
-        {@UniqueConstraint(columnNames = "email", name = "uniqueEmailConstraint")})
+//@Table(name = "Customers", uniqueConstraints =
+//        {@UniqueConstraint(columnNames = "email", name = "uniqueEmailConstraint")})
 @Component
 @Scope("prototype") //can create many customers
 public class Customer {
@@ -24,7 +24,7 @@ public class Customer {
     @Column
     private String lastName;
     @NotBlank
-    @Column
+    @Column(unique = true)
     private String email;
     @NotBlank
     @Column

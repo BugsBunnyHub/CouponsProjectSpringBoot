@@ -8,11 +8,12 @@ import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.List;
 
-//TODO all names to all beans
 @Entity
-@Table(name = "Companies",
-        uniqueConstraints = {@UniqueConstraint(columnNames = "name", name = "uniqueNameConstraint"),
-                @UniqueConstraint(columnNames = "email", name = "uniqueNameConstraint")})
+//TODO ask Nir why this doesn't work
+//@Table(name = "Companies", uniqueConstraints={@UniqueConstraint(columnNames = "name"),@UniqueConstraint(columnNames = "email")})
+//@Table(name = "Companies",
+//        uniqueConstraints = {@UniqueConstraint(columnNames = "name"),
+//                @UniqueConstraint(columnNames = "email")})
 @Component
 @Scope("prototype") //can create many companies
 public class Company {
@@ -20,10 +21,10 @@ public class Company {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @NotBlank
-    @Column
+    @Column(unique = true) //can be used as a shortcut for UniqueConstraint
     private String name;
     @NotBlank
-    @Column
+    @Column(unique = true)
     private String email;
     @NotBlank
     @Column

@@ -9,8 +9,8 @@ import java.sql.Date;
 
 
 @Entity
-@Table(name = "Coupons", uniqueConstraints =
-        {@UniqueConstraint(columnNames = "title", name = "uniqueTitleConstraint")})
+//@Table(name = "Coupons", uniqueConstraints =
+//        {@UniqueConstraint(columnNames = "title", name = "uniqueTitleConstraint")})
 @Component
 @Scope("prototype") //can create many coupons
 public class Coupon {
@@ -24,10 +24,9 @@ public class Coupon {
       @Min, @Max works for int @Size works for String/collection
      * @NotBlank best of all options for empty/invalid input checks
      */
-    //TODO add @min/@max to passwords
     private int amount;
     @NotBlank
-    @Column
+    @Column(unique = true)
     private String title;
     @Column
     private String description;
