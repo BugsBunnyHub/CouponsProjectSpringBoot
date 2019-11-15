@@ -67,8 +67,8 @@ public class AdminFacade extends ClientFacade {
         return customerDB.getAllCustomers();
     }
 
-    public Customer isCustomerExists(String name, String password) {
-        return customerDB.isCustomerExists(name, password);
+    public Customer isCustomerExists(String email, String password) {
+        return customerDB.isCustomerExists(email, password);
     }
 
     public Customer findCustomerByEmail(String email) {

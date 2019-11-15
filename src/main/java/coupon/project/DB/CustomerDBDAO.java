@@ -36,8 +36,8 @@ public class CustomerDBDAO {
         customerRepo.findById(id);
     }
 
-    public Customer isCustomerExists(String name, String password) {
-        return customerRepo.findCustomerByEmailAndPassword(name, password);
+    public Customer isCustomerExists(String email, String password) {
+        return customerRepo.findCustomerByEmailAndPassword(email, password);
     }
 
     public Customer isCustomerEmailExists(String email) {
