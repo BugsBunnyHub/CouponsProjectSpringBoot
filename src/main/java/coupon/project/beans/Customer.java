@@ -4,8 +4,6 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,8 +28,13 @@ public class Customer {
     private String email;
     @NotBlank
     @Column(name = "password")
-    @Min(value = 6)
-    @Max(value = 16)
+    //@Min and @Max are used for validating numeric fields which could be String(representing number), int, short, byte etc and their respective primitive wrappers
+    //@Size is used to check the length constraints on the fields
+    //As per documentation @Size supports String, Collection, Map and arrays while @Min and @Max supports primitives and their wrappers
+    //Since password can be both numbers and chars it can't be applied here
+
+//    @Min(value = 6, message = "Password is lower then 6 chars")
+//    @Max(value = 16, message = "Password is over 16 chars")
     private String password;
     @Column
     @OneToMany(fetch = FetchType.EAGER)

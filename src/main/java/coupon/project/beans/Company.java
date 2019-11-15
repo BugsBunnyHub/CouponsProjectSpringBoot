@@ -9,10 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-//TODO ask Nir why this doesn't work
 //@Table(name = "Companies", uniqueConstraints={@UniqueConstraint(columnNames = "name"),@UniqueConstraint(columnNames = "email")})
 //@Table(name = "Companies",
-//        uniqueConstraints = {@UniqueConstraint(columnNames = "name"),
+//      uniqueConstraints = {@UniqueConstraint(columnNames = "name"),
 //                @UniqueConstraint(columnNames = "email")})
 @Component
 @Scope("prototype") //can create many companies
@@ -24,7 +23,7 @@ public class Company {
     @Column(name = "name", unique = true) //can be used as a shortcut for UniqueConstraint
     private String name;
     @NotBlank
-    @Column(name = "name", unique = true)
+    @Column(name = "email", unique = true)
     private String email;
     @NotBlank
     @Column(name = "password")
