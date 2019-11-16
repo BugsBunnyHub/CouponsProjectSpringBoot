@@ -33,7 +33,7 @@ public class Company {
     // One company can have many coupons
     // EAGER to create the companies as soon as possible
     //MappedBy mapping the connection in other class
-    //orphanRemoval is an entirely ORM-specific,It marks "child" entity to be removed when it's no longer
+    //orphanRemoval is an entirely ORM-specific,It marks "child" entity to be removed when it's no longer -->
     // referenced from the "parent" entity, e.g. when you remove the child entity from the corresponding collection of the parent entity.
     // Cascade for auto delete coupons and other related obj
 
