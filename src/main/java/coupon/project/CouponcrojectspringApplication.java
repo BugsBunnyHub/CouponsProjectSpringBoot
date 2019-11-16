@@ -1,7 +1,9 @@
 package coupon.project;
 
 import coupon.project.DB.CompanyDBDAO;
+import coupon.project.beans.Category;
 import coupon.project.beans.Company;
+import coupon.project.beans.Coupon;
 import coupon.project.facades.AdminFacade;
 import coupon.project.facades.CompanyFacade;
 import coupon.project.login.ClientType;
@@ -10,8 +12,28 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 
+import java.util.Calendar;
+import java.util.Date;
+
 @SpringBootApplication
 public class CouponcrojectspringApplication {
+
+    public static Date getToday() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        return calendar.getTime();
+    }
+
+    public static Date getTomorrow() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DAY_OF_YEAR, 1);
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        return calendar.getTime();
+    }
 
     public static void main(String[] args) {
 
@@ -35,28 +57,29 @@ public class CouponcrojectspringApplication {
             //Check if customer exists by email and password - works
             //System.out.println(admin.isCustomerExists("DanielShatz@gmail.com", "123"));
             //Add company - works
-            Company company1 = new Company("Shatz ltd", "shatz@shatz.com", "123"); // Works
+            Company company1 = new Company("Shatz ltd", "shatz@shatz.com", "123");
             admin.addCompany(company1);
             //Update company TODO doesn't work
-            //Print all companies
-            //Delete company
+            //admin.updateCompany();
+            //Print all companies - works
+            //System.out.println(admin.GetAllCompanies());
+            //Delete company - works after creating company1, doesn't work if called after creation TODO check why
+            //admin.deleteCompany(company1.getId());
 
             //Company
             CompanyDBDAO co1 = ctx.getBean(CompanyDBDAO.class);
             CompanyFacade companyFacade = (CompanyFacade) loginManger.login("shatz@shatz.com", "123", ClientType.Company);
-
-            //Add coupon
+            //Add coupon - works
+            Date today = getToday();
+            Date tomorrow = getTomorrow();
+            Coupon coupon = new Coupon(company1, 100, "test coupon", "test description", "image.jpg", Category.Electricity, today, tomorrow, 555.5);
+            companyFacade.addCoupon(coupon);
             //Update coupon
             //Print all coupons for company
             //Delete coupon
 
             //Customer
             //Purchase coupon
-
-
-
-
-
 
 
 //            CustomerDBDAO cu1 = ctx.getBean(CustomerDBDAO.class);
@@ -76,7 +99,8 @@ public class CouponcrojectspringApplication {
 //            customerFacade.purchaseCoupon(coupon.getId());
 
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            // this null comes from here I think
+            e.printStackTrace();
         }
 
 

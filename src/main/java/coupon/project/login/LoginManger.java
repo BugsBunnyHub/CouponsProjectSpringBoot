@@ -18,23 +18,27 @@ public class LoginManger {
         switch (type) {
             case Admin:
                 AdminFacade adminService = ctx.getBean(AdminFacade.class);
-                if (adminService.login(email, password))
+                if (adminService.login(email, password)) {
+                    System.out.println("Connected to Admin service");
                     return adminService;
-                else
+                } else
                     throw new LoginFailedException();
 
             case Company:
                 CompanyFacade companyService = ctx.getBean(CompanyFacade.class);
-                if (companyService.login(email, password))
+                if (companyService.login(email, password)) {
+                    System.out.println("Connected to Company service");
                     return companyService;
-                else
+                } else
                     throw new LoginFailedException();
+
 
             case Customer:
                 CustomerFacade customerService = ctx.getBean(CustomerFacade.class);
-                if (customerService.login(email, password))
+                if (customerService.login(email, password)) {
+                    System.out.println("Connected to Customer service");
                     return customerService;
-                else
+                } else
                     throw new LoginFailedException();
 
             default:

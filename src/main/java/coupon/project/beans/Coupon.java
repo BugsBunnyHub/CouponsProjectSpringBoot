@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import java.sql.Date;
+import java.util.Date;
 
 
 @Entity
@@ -17,7 +17,8 @@ public class Coupon {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "company_id")
     private Company companyID;
     @Column(name = "amount")
     /*
@@ -56,6 +57,7 @@ public class Coupon {
         this.endDate = endDate;
         this.price = price;
     }
+
 
     public Integer getId() {
         return id;

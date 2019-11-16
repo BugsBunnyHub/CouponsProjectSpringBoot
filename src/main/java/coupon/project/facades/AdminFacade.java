@@ -28,6 +28,15 @@ public class AdminFacade extends ClientFacade {
         companyDB.updateCompany(company);
     }
 
+//    public void updateCompany(Company company) throws CompanyExistsException {
+//        List<Company> allCompanies = companyDB.GetAllCompanies();
+//        for (Company comp : allCompanies) {
+//            if (comp.getName().contentEquals(company.getName()) && comp.getId() == company.getId()) {
+//                throw new CompanyExistsException();
+//            }else companyDB.updateCompany(company);
+//        }
+//    }
+
     public List<Company> GetAllCompanies() {
         return companyDB.GetAllCompanies();
     }

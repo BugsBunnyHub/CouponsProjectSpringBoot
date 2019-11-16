@@ -29,10 +29,14 @@ public class Company {
     @Column(name = "password")
     private String password;
     @Column
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "companyID", orphanRemoval = true, cascade = CascadeType.ALL)
     // One company can have many coupons
     // EAGER to create the companies as soon as possible
+    //MappedBy mapping the connection in other class
+    //orphanRemoval is an entirely ORM-specific,It marks "child" entity to be removed when it's no longer
+    // referenced from the "parent" entity, e.g. when you remove the child entity from the corresponding collection of the parent entity.
     // Cascade for auto delete coupons and other related obj
+
     private List<Coupon> coupons = new ArrayList<>();
 
     //empty con for hibernate
@@ -51,6 +55,7 @@ public class Company {
         this.email = email;
         this.password = password;
     }
+
 
     public int getId() {
         return id;
