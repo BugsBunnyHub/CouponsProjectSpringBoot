@@ -1,7 +1,11 @@
 package coupon.project;
 
 import coupon.project.DB.CompanyDBDAO;
+import coupon.project.beans.Category;
+import coupon.project.beans.Company;
+import coupon.project.beans.Coupon;
 import coupon.project.facades.AdminFacade;
+import coupon.project.facades.CompanyFacade;
 import coupon.project.login.ClientType;
 import coupon.project.login.LoginManger;
 import org.springframework.boot.SpringApplication;
@@ -57,8 +61,9 @@ public class CouponcrojectspringApplication {
             //admin.deleteCustomer(c1.getId());
             //Check if customer exists by email and password - works
             //System.out.println(admin.isCustomerExists("DanielShatz@gmail.com", "123"));
+
             //Add company - works
-            //Company company1 = new Company("Shatz ltd", "shatz@shatz.com", "123");
+            Company company1 = new Company("Shatz ltd", "shatz@shatz.com", "123");
             //admin.addCompany(company1);
             //Update company - works
             //System.out.println("Company name before update: " + company1.getName());
@@ -72,13 +77,17 @@ public class CouponcrojectspringApplication {
 
             //Company
             CompanyDBDAO co1 = ctx.getBean(CompanyDBDAO.class);
-            //CompanyFacade companyFacade = (CompanyFacade) loginManger.login("shatz@shatz.com", "123", ClientType.Company);
+            CompanyFacade companyFacade = (CompanyFacade) loginManger.login("shatz@shatz.com", "123", ClientType.Company);
             //Add coupon - works
             Date today = getToday();
             Date tomorrow = getTomorrow();
-            //Coupon coupon = new Coupon(company1, 100, "test coupon", "test description", "image.jpg", Category.Electricity, today, tomorrow, 555.5);
-            //companyFacade.addCoupon(coupon);
-            //Update coupon
+            Coupon coupon1 = new Coupon(company1, 100, "test coupon", "test description", "image.jpg", Category.Electricity, today, tomorrow, 555.5);
+            //companyFacade.addCoupon(coupon1);
+            //Update coupon - TODO doesn't work
+            //System.out.println("Coupon amount before update: " + coupon1.getAmount());
+            //coupon1.setAmount(600);
+            //companyFacade.updateCoupon(coupon1);
+            //System.out.println("Coupon amount after update: " + coupon1.getAmount());
             //Print all coupons for company
             //Delete coupon
 

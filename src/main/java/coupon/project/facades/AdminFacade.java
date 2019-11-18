@@ -17,6 +17,7 @@ public class AdminFacade extends ClientFacade {
 
     // Company methods
     public void addCompany(Company company) throws CompanyExistsException {
+
         companyDB.addCompany(company);
     }
 

@@ -33,8 +33,8 @@ public class Customer {
     //As per documentation @Size supports String, Collection, Map and arrays while @Min and @Max supports primitives and their wrappers
     //Since password can be both numbers and chars it can't be applied here
 
-//    @Min(value = 6, message = "Password is lower then 6 chars")
-//    @Max(value = 16, message = "Password is over 16 chars")
+    //@Min(value = 6, message = "Password is lower then 6 chars")
+    //@Max(value = 16, message = "Password is over 16 chars")
     private String password;
     @Column
     @OneToMany(fetch = FetchType.EAGER)
