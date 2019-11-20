@@ -35,7 +35,7 @@ public class CompanyFacade extends ClientFacade {
             if (coupon.getTitle().equalsIgnoreCase(companyCoupon.getTitle()))
                 System.out.println("Coupon is already registered!"); //TODO: Replace
         }
-        company.getCoupons().add(coupon);
+        company.getCoupons().add(coupon); //TODO can be used for customer
         companyDB.updateCompany(company);
     }
 

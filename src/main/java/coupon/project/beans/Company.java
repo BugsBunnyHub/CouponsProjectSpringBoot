@@ -18,9 +18,11 @@ import java.util.List;
 public class Company {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //GeneratedValue is used to specify how the primary key should be
+    //generated ex: ID:1...2...3
     private int id;
     @NotBlank
-    @Column(name = "name", unique = true) //can be used as a shortcut for UniqueConstraint
+    @Column(name = "name", unique = true) //"unique" can be used as a shortcut for UniqueConstraint
     private String name;
     @NotBlank
     @Column(name = "email", unique = true)
@@ -30,12 +32,13 @@ public class Company {
     private String password;
     @Column
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "companyID", orphanRemoval = true, cascade = CascadeType.ALL)
-    // One company can have many coupons
-    // EAGER to create the companies as soon as possible
-    //MappedBy mapping the connection in other class
+    //One company can have many coupons
+    //EAGER to create the companies as soon as possible
+    //MappedBy mapping the in the DB
     //orphanRemoval is an entirely ORM-specific,It marks "child" entity to be removed when it's no longer -->
-    // referenced from the "parent" entity, e.g. when you remove the child entity from the corresponding collection of the parent entity.
-    // Cascade for auto delete coupons and other related obj
+    // referenced from the "parent" entity, e.g. when you remove the child entity from the corresponding collection of
+    // the parent entity
+    //Cascade for auto delete coupons and other related obj
 
     private List<Coupon> coupons = new ArrayList<>();
 

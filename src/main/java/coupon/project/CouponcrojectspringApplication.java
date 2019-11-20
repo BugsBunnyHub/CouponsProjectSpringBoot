@@ -18,6 +18,7 @@ import java.util.Date;
 @SpringBootApplication
 public class CouponcrojectspringApplication {
 
+
     public static Date getToday() {
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.HOUR_OF_DAY, 0);
@@ -33,10 +34,10 @@ public class CouponcrojectspringApplication {
         calendar.set(Calendar.MINUTE, 0);
         calendar.set(Calendar.SECOND, 0);
         return calendar.getTime();
+
     }
 
     public static void main(String[] args) {
-
 
         ConfigurableApplicationContext ctx = SpringApplication.run(CouponcrojectspringApplication.class, args);
         try {
@@ -77,11 +78,14 @@ public class CouponcrojectspringApplication {
 
             //Company
             CompanyDBDAO co1 = ctx.getBean(CompanyDBDAO.class);
-            CompanyFacade companyFacade = (CompanyFacade) loginManger.login("shatz@shatz.com", "123", ClientType.Company);
+            co1.addCompany(company1);
+            CompanyFacade companyFacade = (CompanyFacade) loginManger.login("shatz@shatz.com", "123",
+                    ClientType.Company);
             //Add coupon - works
             Date today = getToday();
             Date tomorrow = getTomorrow();
-            Coupon coupon1 = new Coupon(company1, 100, "test coupon", "test description", "image.jpg", Category.Electricity, today, tomorrow, 555.5);
+            Coupon coupon1 = new Coupon(company1, 100, "test coupon", "test description",
+                    "image.jpg", Category.Electricity, today, tomorrow, 555.5);
             //companyFacade.addCoupon(coupon1);
             //Update coupon - TODO doesn't work
             //System.out.println("Coupon amount before update: " + coupon1.getAmount());

@@ -16,6 +16,7 @@ import java.util.Date;
 public class Coupon {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //GeneratedValue is used to specify how the primary key should be generated
     private int id;
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "company_id")
@@ -28,6 +29,7 @@ public class Coupon {
     private int amount;
     @NotBlank
     @Column(name = "title", unique = true)
+    //"unique" can be used as a shortcut for UniqueConstraint
     private String title;
     @Column(name = "description")
     private String description;
@@ -57,7 +59,6 @@ public class Coupon {
         this.endDate = endDate;
         this.price = price;
     }
-
 
     public Integer getId() {
         return id;

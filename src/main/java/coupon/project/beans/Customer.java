@@ -16,7 +16,8 @@ import java.util.List;
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id; // for security better to use UUID.randomUUID() to generate random ID key as String not int
+    // for security better to use UUID.randomUUID() to generate random ID key as String not int
+    private int id;
     @NotBlank
     @Column(name = "firstName")
     private String firstName;
@@ -25,12 +26,15 @@ public class Customer {
     private String lastName;
     @NotBlank
     @Column(name = "email", unique = true)
+    //"unique" can be used as a shortcut for UniqueConstraint
     private String email;
     @NotBlank
     @Column(name = "password")
-    //@Min and @Max are used for validating numeric fields which could be String(representing number), int, short, byte etc and their respective primitive wrappers
+    //@Min and @Max are used for validating numeric fields which could be String(representing number), int, short,
+    // byte etc and their respective primitive wrappers
     //@Size is used to check the length constraints on the fields
-    //As per documentation @Size supports String, Collection, Map and arrays while @Min and @Max supports primitives and their wrappers
+    //@Size supports String, Collection, Map and arrays while @Min and @Max supports primitives
+    // and their wrappers
     //Since password can be both numbers and chars it can't be applied here
 
     //@Min(value = 6, message = "Password is lower then 6 chars")
@@ -38,6 +42,7 @@ public class Customer {
     private String password;
     @Column
     @OneToMany(fetch = FetchType.EAGER)
+    //EAGER to create this list as soon as possible
     private List<Coupon> coupons = new ArrayList<>();
 
     //empty con for hibernate
