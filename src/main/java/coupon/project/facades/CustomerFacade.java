@@ -1,14 +1,14 @@
 package coupon.project.facades;
 
+import coupon.project.Exceptions.CouponAlreadyPurchasedException;
+import coupon.project.Exceptions.InvalidAmountException;
+import coupon.project.beans.Coupon;
 import coupon.project.beans.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.util.List;
 
 @Service
 public class CustomerFacade extends ClientFacade {
@@ -18,7 +18,6 @@ public class CustomerFacade extends ClientFacade {
     DataSource dataSource;
 
     @Override
-    //TODO check this method
     //customer login with email and password
     public boolean login(String email, String password) {
         Customer customer = customerDB.isCustomerExists(email, password);
@@ -29,34 +28,38 @@ public class CustomerFacade extends ClientFacade {
             return false;
     }
 
-    public void purchaseCoupon(int couponId) throws SQLException {
-        Connection conn = dataSource.getConnection();
-        String sql = "SELECT amount FROM couponspring.coupons WHERE id=?";
-        PreparedStatement prep = conn.prepareStatement(sql);
-        prep.setInt(1, couponId);
-        ResultSet rs = prep.executeQuery();
-        rs.next();
-        int amount = rs.getInt("amount");
+    //TODO Add Date check
+    public void purchaseCoupon(Coupon coupon) throws InvalidAmountException, CouponAlreadyPurchasedException {
+        if (coupon.getAmount() == 0) {
+            throw new InvalidAmountException();
+        }
 
-        if (amount <= 0) return;
-
-        Connection conn1 = dataSource.getConnection();
-        String sql1 = "INSERT INTO couponspring.customers_coupons VALUES(?, ?)";
-        PreparedStatement prep1 = conn1.prepareStatement(sql1);
-        prep1.setInt(1, customerId);
-        prep1.setInt(2, couponId);
-        boolean result = prep1.execute();
-
-        if (!result) return;
-
-        Connection conn2 = dataSource.getConnection();
-        String sql2 = "UPDATE couponspring.coupons SET amount=? WHERE id=?";
-        PreparedStatement prep2 = conn2.prepareStatement(sql2);
-        prep2.setInt(1, --amount);
-        prep2.setInt(2, couponId);
-        boolean result2 = prep2.execute(); // boolean for future use
+        if (!isCouponPurchased(coupon))
+            throw new CouponAlreadyPurchasedException();
+        else {
+            Customer customer = customerDB.findOneCustomer(customerId);
+            customer.getCoupons().add(coupon);
+            customerDB.updateCustomer(customer);
+            coupon.setAmount(couponDB.getOneCoupon(coupon.getId()).getAmount() - 1);
+            couponDB.updateCoupon(coupon);
+        }
     }
 
+    public void deleteCouponPurchase(Coupon coupon) {
+        Customer customer = customerDB.findOneCustomer(customerId);
+        customer.getCoupons().remove(coupon);
+        customerDB.updateCustomer(customer);
+    }
 
+    private boolean isCouponPurchased(Coupon coupon) {
+        Customer customer = customerDB.findOneCustomer(customerId);
+        List<Coupon> coupons = customer.getCoupons();
+        for (Coupon c : coupons) {
+            if (c.getId().equals(coupon.getId())) {
+                return false;
+            }
+        }
+        return true;
+    }
 
 }

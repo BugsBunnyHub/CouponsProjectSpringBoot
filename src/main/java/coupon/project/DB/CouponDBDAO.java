@@ -30,6 +30,10 @@ public class CouponDBDAO {
 
     }
 
+    public List<Coupon> getAllCoupons() {
+        return couponRepo.findAll();
+    }
+
     public Coupon getOneCoupon(int id) {
         Optional<Coupon> couponOptional = couponRepo.findById(id);
         return couponOptional.orElse(null);

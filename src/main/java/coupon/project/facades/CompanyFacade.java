@@ -1,5 +1,6 @@
 package coupon.project.facades;
 
+import coupon.project.Exceptions.CouponAlreadyInUseException;
 import coupon.project.beans.Company;
 import coupon.project.beans.Coupon;
 import coupon.project.beans.Customer;
@@ -26,14 +27,14 @@ public class CompanyFacade extends ClientFacade {
     }
 
     //add new coupon
-    public void addCoupon(Coupon coupon) {
+    public void addCoupon(Coupon coupon) throws CouponAlreadyInUseException {
         //check if this company has another coupon with the same title
         Company company = companyDB.findOneCompany(this.companyId);
         List<Coupon> companyCoupons = couponDB.getCouponByCompany(company);
 
         for (Coupon companyCoupon : companyCoupons) {
             if (coupon.getTitle().equalsIgnoreCase(companyCoupon.getTitle()))
-                System.out.println("Coupon is already registered!"); //TODO: Replace
+                throw new CouponAlreadyInUseException();
         }
         company.getCoupons().add(coupon); //TODO can be used for customer
         companyDB.updateCompany(company);

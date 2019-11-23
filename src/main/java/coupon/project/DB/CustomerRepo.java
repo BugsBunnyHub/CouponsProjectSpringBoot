@@ -14,5 +14,4 @@ public interface CustomerRepo extends JpaRepository<Customer, Integer> {
 
     List<Customer> findCustomerByCoupons(Coupon coupon);
 
-
 }

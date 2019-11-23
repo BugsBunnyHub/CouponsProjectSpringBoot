@@ -1,6 +1,7 @@
 package coupon.project;
 
 import coupon.project.DB.CompanyDBDAO;
+import coupon.project.DB.CustomerDBDAO;
 import coupon.project.beans.Category;
 import coupon.project.beans.Company;
 import coupon.project.beans.Coupon;
@@ -46,6 +47,7 @@ public class CouponcrojectspringApplication {
 
             //Admin
             AdminFacade admin = (AdminFacade) loginManger.login("admin@admin.com", "admin", ClientType.Admin);
+
             //Add customer - works
             //Customer c1 = new Customer("Daniel", "Shatz", "DanielShatz@gmail.com", "123");
             //admin.addCustomer(c1);
@@ -93,17 +95,13 @@ public class CouponcrojectspringApplication {
             //companyFacade.updateCoupon(coupon1);
             //System.out.println("Coupon amount after update: " + coupon1.getAmount());
             //Print all coupons for company
-            //Delete coupon
+            //Delete coupon TODO check this method after customer purchase
+            companyFacade.deleteCoupon(coupon1.getId());
 
             //Customer
+            CustomerDBDAO cu1 = ctx.getBean(CustomerDBDAO.class);
             //Purchase coupon
 
-
-//
-//            CustomerFacade customerFacade = (CustomerFacade) loginManger.login("DanielShatz@gmail.com", "123", ClientType.Customer);
-//            List<Coupon> coupons = repo.findAllByAmountIsGreaterThanAndEndDateIsAfter(0, new Date(Instant.now().getEpochSecond() * 1000)); // getEpochSecond get's time  in seconds, *1000 to get it in miliseconds
-//            Coupon coupon = coupons.get(0);
-//            customerFacade.purchaseCoupon(coupon.getId());
 
         } catch (Exception e) {
             e.printStackTrace();
