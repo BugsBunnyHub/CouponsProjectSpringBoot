@@ -18,7 +18,7 @@ public class Coupon {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     //GeneratedValue is used to specify how the primary key should be generated
     private int id;
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false, cascade = CascadeType.ALL)
     @JoinColumn(name = "company_id")
     private Company companyID;
     @Column(name = "amount")

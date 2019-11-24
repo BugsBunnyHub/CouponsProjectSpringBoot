@@ -36,7 +36,7 @@ public class CompanyFacade extends ClientFacade {
             if (coupon.getTitle().equalsIgnoreCase(companyCoupon.getTitle()))
                 throw new CouponAlreadyInUseException();
         }
-        company.getCoupons().add(coupon); //TODO can be used for customer
+        company.getCoupons().add(coupon);
         companyDB.updateCompany(company);
     }
 

@@ -28,7 +28,7 @@ public class CompanyDBDAO {
         companyRepo.deleteById(id);
     }
 
-    public List<Company> GetAllCompanies() {
+    public List<Company> getAllCompanies() {
         return companyRepo.findAll();
     }
 

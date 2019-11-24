@@ -41,7 +41,7 @@ public class Customer {
     //@Max(value = 16, message = "Password is over 16 chars")
     private String password;
     @Column
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     //EAGER to create this list as soon as possible
     private List<Coupon> coupons = new ArrayList<>();
 
