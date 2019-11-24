@@ -17,12 +17,12 @@ public class CouponDBDAO {
     @Autowired
     private CouponRepo couponRepo;
 
-    public void addCoupon(Coupon coupon) {
+    public Coupon addCoupon(Coupon coupon) {
         couponRepo.save(coupon);
+        return coupon;
     }
 
     public void updateCoupon(@NotNull Coupon coupon) throws couponNotFoundException {
-        System.out.println("counpon id: " + coupon.getId());
         if (couponRepo.existsById(coupon.getId()))
             couponRepo.save(coupon);
         else {

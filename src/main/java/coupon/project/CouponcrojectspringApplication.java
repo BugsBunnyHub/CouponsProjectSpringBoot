@@ -90,11 +90,10 @@ public class CouponcrojectspringApplication {
                     "image.jpg", Category.Electricity, today, tomorrow, 555.5);
             companyFacade.addCoupon(coupon1);
             System.out.println("coupon1 ID:" + coupon1.getId());
-            //Update coupon - TODO doesn't work
+            //Update coupon - works
             System.out.println("Coupon amount before update: " + coupon1.getAmount());
-            companyFacade.getOneCoupon(coupon1.getId());
             coupon1.setAmount(6000);
-            companyFacade.updateCoupon(coupon1); //this updates it in the DB
+            companyFacade.updateCoupon(coupon1);
 
 
             System.out.println("Coupon amount after update: " + coupon1.getAmount());
