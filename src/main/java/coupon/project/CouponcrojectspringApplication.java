@@ -2,11 +2,14 @@ package coupon.project;
 
 import coupon.project.DB.CompanyDBDAO;
 import coupon.project.DB.CouponDBDAO;
+import coupon.project.DB.CustomerDBDAO;
 import coupon.project.beans.Category;
 import coupon.project.beans.Company;
 import coupon.project.beans.Coupon;
+import coupon.project.beans.Customer;
 import coupon.project.facades.AdminFacade;
 import coupon.project.facades.CompanyFacade;
+import coupon.project.facades.CustomerFacade;
 import coupon.project.login.ClientType;
 import coupon.project.login.LoginManger;
 import org.springframework.boot.SpringApplication;
@@ -48,8 +51,8 @@ public class CouponcrojectspringApplication {
             AdminFacade admin = (AdminFacade) loginManger.login("admin@admin.com", "admin", ClientType.Admin);
 
             //Add customer - works
-            //Customer c1 = new Customer("Daniel", "Shatz", "DanielShatz@gmail.com", "123");
-            //admin.addCustomer(c1);
+            Customer c1 = new Customer("Daniel", "Shatz", "DanielShatz@gmail.com", "123");
+            admin.addCustomer(c1);
             //System.out.println("Added customer with info:");
             //System.out.println(c1.toString());
             //Update customer - works
@@ -94,8 +97,6 @@ public class CouponcrojectspringApplication {
             System.out.println("Coupon amount before update: " + coupon1.getAmount());
             coupon1.setAmount(6000);
             companyFacade.updateCoupon(coupon1);
-
-
             System.out.println("Coupon amount after update: " + coupon1.getAmount());
             //Print all coupons for company TODO add this method
             //System.out.println(cou1.getCouponByCompany(company1));
@@ -103,10 +104,10 @@ public class CouponcrojectspringApplication {
             //companyFacade.deleteCoupon(coupon1.getId());
 
             //Customer
-            //CustomerDBDAO cu1 = ctx.getBean(CustomerDBDAO.class);
-            //CustomerFacade customerFacade = (CustomerFacade) loginManger.login("DanielShatz@gmail.com", "123",
-            //ClientType.Customer);
-            //Purchase coupon TODO getting NullPointerException but it works
+            CustomerDBDAO cu1 = ctx.getBean(CustomerDBDAO.class);
+            CustomerFacade customerFacade = (CustomerFacade) loginManger.login("DanielShatz@gmail.com", "123",
+                    ClientType.Customer);
+            //Purchase coupon - works
             //customerFacade.purchaseCoupon(coupon1);
             //Delete coupon purchase
             //customerFacade.deleteCouponPurchase(coupon1);
