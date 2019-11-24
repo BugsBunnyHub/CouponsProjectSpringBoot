@@ -2,6 +2,7 @@ package coupon.project.facades;
 
 import coupon.project.Exceptions.CouponAlreadyPurchasedException;
 import coupon.project.Exceptions.InvalidAmountException;
+import coupon.project.Exceptions.couponNotFoundException;
 import coupon.project.beans.Coupon;
 import coupon.project.beans.Customer;
 import org.springframework.stereotype.Service;
@@ -24,7 +25,7 @@ public class CustomerFacade extends ClientFacade {
     }
 
     //TODO Add Date check
-    public void purchaseCoupon(Coupon coupon) throws InvalidAmountException, CouponAlreadyPurchasedException {
+    public void purchaseCoupon(Coupon coupon) throws InvalidAmountException, CouponAlreadyPurchasedException, couponNotFoundException {
         if (coupon.getAmount() == 0) {
             throw new InvalidAmountException();
         }
@@ -50,7 +51,7 @@ public class CustomerFacade extends ClientFacade {
         Customer customer = customerDB.findOneCustomer(customerId);
         List<Coupon> coupons = customer.getCoupons();
         for (Coupon c : coupons) {
-            if (c.getId().equals(coupon.getId())) {
+            if (c.getId() == (coupon.getId())) {
                 return false;
             }
         }

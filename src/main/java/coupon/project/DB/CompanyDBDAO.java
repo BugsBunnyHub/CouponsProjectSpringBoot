@@ -1,6 +1,7 @@
 package coupon.project.DB;
 
 
+import coupon.project.Exceptions.companyNotFoundException;
 import coupon.project.beans.Company;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -18,9 +19,11 @@ public class CompanyDBDAO {
         this.companyRepo.save(company);
     }
 
-    public void updateCompany(Company company) {
+    public void updateCompany(Company company) throws companyNotFoundException {
         if (companyRepo.existsById(company.getId())) {
             companyRepo.save(company);
+        } else {
+            throw new companyNotFoundException();
         }
     }
 

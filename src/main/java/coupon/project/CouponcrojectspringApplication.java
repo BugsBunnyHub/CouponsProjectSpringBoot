@@ -1,10 +1,12 @@
 package coupon.project;
 
 import coupon.project.DB.CompanyDBDAO;
-import coupon.project.DB.CustomerDBDAO;
+import coupon.project.DB.CouponDBDAO;
+import coupon.project.beans.Category;
+import coupon.project.beans.Company;
+import coupon.project.beans.Coupon;
 import coupon.project.facades.AdminFacade;
 import coupon.project.facades.CompanyFacade;
-import coupon.project.facades.CustomerFacade;
 import coupon.project.login.ClientType;
 import coupon.project.login.LoginManger;
 import org.springframework.boot.SpringApplication;
@@ -63,8 +65,8 @@ public class CouponcrojectspringApplication {
             //System.out.println(admin.isCustomerExists("DanielShatz@gmail.com", "123"));
 
             //Add company - works
-            //Company company1 = new Company("Shatz ltd", "shatz@shatz.com", "123");
-            //admin.addCompany(company1);
+            Company company1 = new Company("Shatz ltd", "shatz@shatz.com", "123");
+            admin.addCompany(company1);
             //Update company - works
             //System.out.println("Company name before update: " + company1.getName());
             //company1.setName("Shatz Updated ltd");
@@ -77,36 +79,41 @@ public class CouponcrojectspringApplication {
 
             //Company
             CompanyDBDAO co1 = ctx.getBean(CompanyDBDAO.class);
+            CouponDBDAO cou1 = ctx.getBean(CouponDBDAO.class);
             CompanyFacade companyFacade = (CompanyFacade) loginManger.login("shatz@shatz.com", "123",
                     ClientType.Company);
             //Add coupon - works
             //Static dates to make the coupon valid for 24h from the creation date for testing
             Date today = getToday();
             Date tomorrow = getTomorrow();
-            //Coupon coupon1 = new Coupon(company1, 100, "test coupon", "test description",
-            //"image.jpg", Category.Electricity, today, tomorrow, 555.5);
-            //companyFacade.addCoupon(coupon1);
+            Coupon coupon1 = new Coupon(company1, 100, "test coupon", "test description",
+                    "image.jpg", Category.Electricity, today, tomorrow, 555.5);
+            companyFacade.addCoupon(coupon1);
+            System.out.println("coupon1 ID:" + coupon1.getId());
             //Update coupon - TODO doesn't work
-            //System.out.println("Coupon amount before update: " + coupon1.getAmount());
-            //coupon1.setAmount(600);
-            //companyFacade.updateCoupon(coupon1);
-            //System.out.println("Coupon amount after update: " + coupon1.getAmount());
-            //Print all coupons for company TODO add this method
+            System.out.println("Coupon amount before update: " + coupon1.getAmount());
+            companyFacade.getOneCoupon(coupon1.getId());
+            coupon1.setAmount(6000);
+            companyFacade.updateCoupon(coupon1); //this updates it in the DB
 
+
+            System.out.println("Coupon amount after update: " + coupon1.getAmount());
+            //Print all coupons for company TODO add this method
+            //System.out.println(cou1.getCouponByCompany(company1));
             //Delete coupon TODO check this method after customer purchase
             //companyFacade.deleteCoupon(coupon1.getId());
 
             //Customer
-            CustomerDBDAO cu1 = ctx.getBean(CustomerDBDAO.class);
-            CustomerFacade customerFacade = (CustomerFacade) loginManger.login("DanielShatz@gmail.com", "123",
-                    ClientType.Customer);
+            //CustomerDBDAO cu1 = ctx.getBean(CustomerDBDAO.class);
+            //CustomerFacade customerFacade = (CustomerFacade) loginManger.login("DanielShatz@gmail.com", "123",
+            //ClientType.Customer);
             //Purchase coupon TODO getting NullPointerException but it works
             //customerFacade.purchaseCoupon(coupon1);
             //Delete coupon purchase
             //customerFacade.deleteCouponPurchase(coupon1);
 
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage()); //printStackTrace();
         }
 
 

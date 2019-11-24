@@ -1,5 +1,6 @@
 package coupon.project.DB;
 
+import coupon.project.Exceptions.couponNotFoundException;
 import coupon.project.beans.Company;
 import coupon.project.beans.Coupon;
 import org.jetbrains.annotations.NotNull;
@@ -20,9 +21,13 @@ public class CouponDBDAO {
         couponRepo.save(coupon);
     }
 
-    public void updateCoupon(@NotNull Coupon coupon) {
+    public void updateCoupon(@NotNull Coupon coupon) throws couponNotFoundException {
+        System.out.println("counpon id: " + coupon.getId());
         if (couponRepo.existsById(coupon.getId()))
             couponRepo.save(coupon);
+        else {
+            throw new couponNotFoundException();
+        }
     }
 
     public void deleteCoupon(int id) {

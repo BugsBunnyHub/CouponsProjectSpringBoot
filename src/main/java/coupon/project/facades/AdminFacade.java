@@ -1,6 +1,7 @@
 package coupon.project.facades;
 
 import coupon.project.Exceptions.CompanyExistsException;
+import coupon.project.Exceptions.companyNotFoundException;
 import coupon.project.beans.Company;
 import coupon.project.beans.Customer;
 import org.springframework.stereotype.Service;
@@ -25,7 +26,7 @@ public class AdminFacade extends ClientFacade {
         companyDB.deleteCompany(id);
     }
 
-    public void updateCompany(Company company) {
+    public void updateCompany(Company company) throws companyNotFoundException {
         companyDB.updateCompany(company);
     }
 
@@ -38,8 +39,8 @@ public class AdminFacade extends ClientFacade {
 //        }
 //    }
 
-    public List<Company> GetAllCompanies() {
-        return companyDB.GetAllCompanies();
+    public List<Company> findAllCompanies() {
+        return companyDB.getAllCompanies();
     }
 
     public void findOneCompany(int id) {
