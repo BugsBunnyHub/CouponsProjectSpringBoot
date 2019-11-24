@@ -4,18 +4,13 @@ import coupon.project.Exceptions.CouponAlreadyPurchasedException;
 import coupon.project.Exceptions.InvalidAmountException;
 import coupon.project.beans.Coupon;
 import coupon.project.beans.Customer;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.sql.DataSource;
 import java.util.List;
 
 @Service
 public class CustomerFacade extends ClientFacade {
     private int customerId;
-
-    @Autowired
-    DataSource dataSource;
 
     @Override
     //customer login with email and password

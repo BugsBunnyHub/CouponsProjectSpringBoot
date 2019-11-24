@@ -5,8 +5,10 @@ import coupon.project.DB.CustomerDBDAO;
 import coupon.project.beans.Category;
 import coupon.project.beans.Company;
 import coupon.project.beans.Coupon;
+import coupon.project.beans.Customer;
 import coupon.project.facades.AdminFacade;
 import coupon.project.facades.CompanyFacade;
+import coupon.project.facades.CustomerFacade;
 import coupon.project.login.ClientType;
 import coupon.project.login.LoginManger;
 import org.springframework.boot.SpringApplication;
@@ -49,7 +51,7 @@ public class CouponcrojectspringApplication {
             AdminFacade admin = (AdminFacade) loginManger.login("admin@admin.com", "admin", ClientType.Admin);
 
             //Add customer - works
-            //Customer c1 = new Customer("Daniel", "Shatz", "DanielShatz@gmail.com", "123");
+            Customer c1 = new Customer("Daniel", "Shatz", "DanielShatz@gmail.com", "123");
             //admin.addCustomer(c1);
             //System.out.println("Added customer with info:");
             //System.out.println(c1.toString());
@@ -90,17 +92,23 @@ public class CouponcrojectspringApplication {
                     "image.jpg", Category.Electricity, today, tomorrow, 555.5);
             //companyFacade.addCoupon(coupon1);
             //Update coupon - TODO doesn't work
-            //System.out.println("Coupon amount before update: " + coupon1.getAmount());
-            //coupon1.setAmount(600);
-            //companyFacade.updateCoupon(coupon1);
-            //System.out.println("Coupon amount after update: " + coupon1.getAmount());
+            System.out.println("Coupon amount before update: " + coupon1.getAmount());
+            coupon1.setAmount(600);
+            companyFacade.updateCoupon(coupon1);
+            System.out.println("Coupon amount after update: " + coupon1.getAmount());
             //Print all coupons for company
             //Delete coupon TODO check this method after customer purchase
             companyFacade.deleteCoupon(coupon1.getId());
 
             //Customer
             CustomerDBDAO cu1 = ctx.getBean(CustomerDBDAO.class);
+            CustomerFacade customerFacade = (CustomerFacade) loginManger.login("DanielShatz@gmail.com", "123",
+                    ClientType.Customer);
             //Purchase coupon
+            customerFacade.purchaseCoupon(coupon1);
+            //Delete coupon purchase
+            customerFacade.deleteCouponPurchase(coupon1);
+
 
 
         } catch (Exception e) {
