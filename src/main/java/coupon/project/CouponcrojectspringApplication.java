@@ -2,7 +2,6 @@ package coupon.project;
 
 import coupon.project.DB.CompanyDBDAO;
 import coupon.project.DB.CouponDBDAO;
-import coupon.project.DB.CustomerDBDAO;
 import coupon.project.beans.Category;
 import coupon.project.beans.Company;
 import coupon.project.beans.Coupon;
@@ -10,6 +9,7 @@ import coupon.project.beans.Customer;
 import coupon.project.facades.AdminFacade;
 import coupon.project.facades.CompanyFacade;
 import coupon.project.facades.CustomerFacade;
+import coupon.project.facades.ExpiredCouponDelete;
 import coupon.project.login.ClientType;
 import coupon.project.login.LoginManger;
 import org.springframework.boot.SpringApplication;
@@ -43,6 +43,9 @@ public class CouponcrojectspringApplication {
     public static void main(String[] args) {
 
         ConfigurableApplicationContext ctx = SpringApplication.run(CouponcrojectspringApplication.class, args);
+        ExpiredCouponDelete expiredCouponDelete = new ExpiredCouponDelete();
+        Thread t = new Thread(expiredCouponDelete);
+        t.start();
         try {
 
             LoginManger loginManger = ctx.getBean(LoginManger.class);
@@ -100,20 +103,21 @@ public class CouponcrojectspringApplication {
             System.out.println("Coupon amount after update: " + coupon1.getAmount());
             //Print all coupons for company TODO add this method
             //System.out.println(cou1.getCouponByCompany(company1));
-            //Delete coupon TODO check this method after customer purchase
+            //Delete coupon - works
             //companyFacade.deleteCoupon(coupon1.getId());
 
             //Customer
-            CustomerDBDAO cu1 = ctx.getBean(CustomerDBDAO.class);
             CustomerFacade customerFacade = (CustomerFacade) loginManger.login("DanielShatz@gmail.com", "123",
                     ClientType.Customer);
             //Purchase coupon - works
-            //customerFacade.purchaseCoupon(coupon1);
+            customerFacade.purchaseCoupon(coupon1);
             //Delete coupon purchase
             //customerFacade.deleteCouponPurchase(coupon1);
 
         } catch (Exception e) {
             System.out.println(e.getMessage()); //printStackTrace();
+        } finally {
+            expiredCouponDelete.stop();
         }
 
 

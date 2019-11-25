@@ -1,12 +1,14 @@
 package coupon.project.facades;
 
-import coupon.project.Exceptions.CouponAlreadyPurchasedException;
-import coupon.project.Exceptions.InvalidAmountException;
+import coupon.project.Exceptions.couponAlreadyPurchasedException;
+import coupon.project.Exceptions.couponDateExpired;
 import coupon.project.Exceptions.couponNotFoundException;
+import coupon.project.Exceptions.invalidAmountException;
 import coupon.project.beans.Coupon;
 import coupon.project.beans.Customer;
 import org.springframework.stereotype.Service;
 
+import java.util.Calendar;
 import java.util.List;
 
 @Service
@@ -24,14 +26,17 @@ public class CustomerFacade extends ClientFacade {
             return false;
     }
 
-    //TODO Add Date check
-    public void purchaseCoupon(Coupon coupon) throws InvalidAmountException, CouponAlreadyPurchasedException, couponNotFoundException {
+    public void purchaseCoupon(Coupon coupon) throws invalidAmountException, couponAlreadyPurchasedException, couponNotFoundException, couponDateExpired {
         if (coupon.getAmount() == 0) {
-            throw new InvalidAmountException();
+            throw new invalidAmountException();
+        }
+        Calendar c = Calendar.getInstance();
+        if (coupon.getEndDate().after(c.getTime())) {
+            throw new couponDateExpired();
         }
 
         if (!isCouponPurchased(coupon))
-            throw new CouponAlreadyPurchasedException();
+            throw new couponAlreadyPurchasedException();
         else {
             Customer customer = customerDB.findOneCustomer(customerId);
             customer.getCoupons().add(coupon);
