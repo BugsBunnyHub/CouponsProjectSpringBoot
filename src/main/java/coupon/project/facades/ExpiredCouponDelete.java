@@ -15,7 +15,6 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-//TODO make it work
 @Component
 public class ExpiredCouponDelete implements Runnable {
 
