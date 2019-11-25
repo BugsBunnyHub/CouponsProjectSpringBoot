@@ -29,7 +29,7 @@ public class CompanyFacade extends ClientFacade {
     }
 
     //add new coupon
-    public void addCoupon(Coupon coupon) throws couponAlreadyInUseException, companyNotFoundException {
+    public Coupon addCoupon(Coupon coupon) throws couponAlreadyInUseException, companyNotFoundException {
         //check if this company has another coupon with the same title
         Company company = companyDB.findOneCompany(this.companyId);
         List<Coupon> companyCoupons = couponDB.getCouponByCompany(company);
@@ -40,8 +40,8 @@ public class CompanyFacade extends ClientFacade {
         }
         Coupon newCoupon = couponDB.addCoupon(coupon);
         company.getCoupons().add(newCoupon);
-        //company.getCoupons().add(coupon);
         companyDB.updateCompany(company);
+        return coupon;
     }
 
     public void deleteCoupon(int couponId) {
@@ -55,14 +55,6 @@ public class CompanyFacade extends ClientFacade {
             customerDB.updateCustomer(customer);
         }
     }
-//    //delete coupon for all customers that have that coupon
-//    public void deleteCoupon(Coupon coupon) {
-//        List<Customer> customers = customerDB.findCustomerByCoupons(coupon);
-//        for (Customer customer : customers) {
-//            customer.getCoupons().remove(coupon);
-//            customerDB.updateCustomer(customer);
-//        }
-//    }
 
     public void updateCoupon(Coupon coupon) throws couponNotFoundException {
         couponDB.updateCoupon(coupon);

@@ -31,7 +31,7 @@ public class CustomerFacade extends ClientFacade {
             throw new invalidAmountException();
         }
         Calendar c = Calendar.getInstance();
-        if (coupon.getEndDate().after(c.getTime())) {
+        if (coupon.getEndDate().before(c.getTime())) {
             throw new couponDateExpired();
         }
 

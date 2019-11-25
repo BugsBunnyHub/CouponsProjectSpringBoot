@@ -2,12 +2,7 @@ package coupon.project;
 
 import coupon.project.DB.CompanyDBDAO;
 import coupon.project.DB.CouponDBDAO;
-import coupon.project.beans.Category;
-import coupon.project.beans.Company;
-import coupon.project.beans.Coupon;
-import coupon.project.beans.Customer;
 import coupon.project.facades.AdminFacade;
-import coupon.project.facades.CompanyFacade;
 import coupon.project.facades.CustomerFacade;
 import coupon.project.facades.ExpiredCouponDelete;
 import coupon.project.login.ClientType;
@@ -40,10 +35,13 @@ public class CouponcrojectspringApplication {
 
     }
 
+    //TODO add return value to all Add methods
+    //TODO run last time check
+
     public static void main(String[] args) {
 
         ConfigurableApplicationContext ctx = SpringApplication.run(CouponcrojectspringApplication.class, args);
-        ExpiredCouponDelete expiredCouponDelete = new ExpiredCouponDelete();
+        ExpiredCouponDelete expiredCouponDelete = ctx.getBean(ExpiredCouponDelete.class);
         Thread t = new Thread(expiredCouponDelete);
         t.start();
         try {
@@ -54,8 +52,8 @@ public class CouponcrojectspringApplication {
             AdminFacade admin = (AdminFacade) loginManger.login("admin@admin.com", "admin", ClientType.Admin);
 
             //Add customer - works
-            Customer c1 = new Customer("Daniel", "Shatz", "DanielShatz@gmail.com", "123");
-            admin.addCustomer(c1);
+            //Customer c1 = new Customer("Daniel", "Shatz", "DanielShatz@gmail.com", "123");
+            //admin.addCustomer(c1);
             //System.out.println("Added customer with info:");
             //System.out.println(c1.toString());
             //Update customer - works
@@ -71,8 +69,8 @@ public class CouponcrojectspringApplication {
             //System.out.println(admin.isCustomerExists("DanielShatz@gmail.com", "123"));
 
             //Add company - works
-            Company company1 = new Company("Shatz ltd", "shatz@shatz.com", "123");
-            admin.addCompany(company1);
+            // company1 = new Company("Shatz ltd", "shatz@shatz.com", "123");
+            //admin.addCompany(company1);
             //Update company - works
             //System.out.println("Company name before update: " + company1.getName());
             //company1.setName("Shatz Updated ltd");
@@ -86,21 +84,21 @@ public class CouponcrojectspringApplication {
             //Company
             CompanyDBDAO co1 = ctx.getBean(CompanyDBDAO.class);
             CouponDBDAO cou1 = ctx.getBean(CouponDBDAO.class);
-            CompanyFacade companyFacade = (CompanyFacade) loginManger.login("shatz@shatz.com", "123",
-                    ClientType.Company);
+            //CompanyFacade companyFacade = (CompanyFacade) loginManger.login("shatz@shatz.com", "123",
+            //ClientType.Company);
             //Add coupon - works
             //Static dates to make the coupon valid for 24h from the creation date for testing
             Date today = getToday();
             Date tomorrow = getTomorrow();
-            Coupon coupon1 = new Coupon(company1, 100, "test coupon", "test description",
-                    "image.jpg", Category.Electricity, today, tomorrow, 555.5);
-            companyFacade.addCoupon(coupon1);
-            System.out.println("coupon1 ID:" + coupon1.getId());
+            //Coupon coupon1 = new Coupon(company1, 100, "test coupon", "test description",
+            //"image.jpg", Category.Electricity, today, tomorrow, 555.5);
+            //companyFacade.addCoupon(coupon1);
+            //System.out.println("coupon1 ID:" + coupon1.getId());
             //Update coupon - works
-            System.out.println("Coupon amount before update: " + coupon1.getAmount());
-            coupon1.setAmount(6000);
-            companyFacade.updateCoupon(coupon1);
-            System.out.println("Coupon amount after update: " + coupon1.getAmount());
+            //System.out.println("Coupon amount before update: " + coupon1.getAmount());
+            //coupon1.setAmount(6000);
+            //companyFacade.updateCoupon(coupon1);
+            //System.out.println("Coupon amount after update: " + coupon1.getAmount());
             //Print all coupons for company TODO add this method
             //System.out.println(cou1.getCouponByCompany(company1));
             //Delete coupon - works
@@ -110,7 +108,7 @@ public class CouponcrojectspringApplication {
             CustomerFacade customerFacade = (CustomerFacade) loginManger.login("DanielShatz@gmail.com", "123",
                     ClientType.Customer);
             //Purchase coupon - works
-            customerFacade.purchaseCoupon(coupon1);
+            //customerFacade.purchaseCoupon(coupon1);
             //Delete coupon purchase
             //customerFacade.deleteCouponPurchase(coupon1);
 

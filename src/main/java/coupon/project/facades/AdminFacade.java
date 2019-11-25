@@ -17,9 +17,9 @@ public class AdminFacade extends ClientFacade {
     }
 
     // Company methods
-    public void addCompany(Company company) throws companyExistsException {
-
+    public Company addCompany(Company company) throws companyExistsException {
         companyDB.addCompany(company);
+        return company;
     }
 
     public void deleteCompany(int id) {
@@ -29,15 +29,6 @@ public class AdminFacade extends ClientFacade {
     public void updateCompany(Company company) throws companyNotFoundException {
         companyDB.updateCompany(company);
     }
-
-//    public void updateCompany(Company company) throws CompanyExistsException {
-//        List<Company> allCompanies = companyDB.GetAllCompanies();
-//        for (Company comp : allCompanies) {
-//            if (comp.getName().contentEquals(company.getName()) && comp.getId() == company.getId()) {
-//                throw new CompanyExistsException();
-//            }else companyDB.updateCompany(company);
-//        }
-//    }
 
     public List<Company> findAllCompanies() {
         return companyDB.getAllCompanies();
@@ -62,8 +53,9 @@ public class AdminFacade extends ClientFacade {
     }
 
     //Customer methods
-    public void addCustomer(Customer customer) {
+    public Customer addCustomer(Customer customer) {
         customerDB.addCustomer(customer);
+        return customer;
     }
 
     public void deleteCustomer(int id) {

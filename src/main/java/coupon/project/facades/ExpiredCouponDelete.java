@@ -25,12 +25,7 @@ public class ExpiredCouponDelete implements Runnable {
     @Autowired
     protected CustomerDBDAO custDB;
 
-
     private boolean exit = false;
-
-    public ExpiredCouponDelete() {
-        super();
-    }
 
     @Override
     public void run() {
@@ -47,29 +42,29 @@ public class ExpiredCouponDelete implements Runnable {
                         List<Customer> customersCouponsToRemove = custDB.getAllCustomers();
                         for (Customer customer : customersCouponsToRemove) {
                             List<Coupon> custCoupon = customer.getCoupons();
-                            custCoupon.remove(custCoupon);
+                            custCoupon.remove(allCoupon);
                             custDB.updateCustomer(customer);
                         }
                         //run on all company coupons
                         List<Company> companyCouponsToRemove = compDB.getAllCompanies();
                         for (Company company : companyCouponsToRemove) {
                             List<Coupon> compCoupon = company.getCoupons();
-                            compCoupon.remove(compCoupon);
+                            compCoupon.remove(allCoupon);
                             compDB.updateCompany(company);
                         }
                         //add expired coupons to list to be removed
                         trashBin.add(allCoupon);
                     }
-                    //remove the trash bin
-                    System.out.println("Coupons removed:" + trashBin);
-                    for (Coupon removeList : trashBin) {
-                        coupDB.deleteCoupon(allCoupon.getId());
-                        trashBin.remove(removeList);
-                    }
 
                     System.out.println("Expired Coupon Checker launched successfully");
                     TimeUnit.HOURS.sleep(24); //sleep for 24h
                 }
+                //remove the trash bin
+                for (Coupon removeList : trashBin) {
+                    coupDB.deleteCoupon(removeList.getId());
+                    trashBin.remove(removeList);
+                }
+
             } catch (InterruptedException | companyNotFoundException e) {
                 e.printStackTrace();
             }
