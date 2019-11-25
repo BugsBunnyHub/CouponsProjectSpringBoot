@@ -16,7 +16,6 @@ public class CustomerDBDAO {
 
     public void addCustomer(Customer customer) {
         customerRepo.save(customer);
-
     }
 
     public void updateCustomer(Customer customer) {

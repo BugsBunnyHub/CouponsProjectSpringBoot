@@ -25,8 +25,7 @@ public class Customer {
     @Column(name = "lastName")
     private String lastName;
     @NotBlank
-    @Column(name = "email", unique = true)
-    //"unique" can be used as a shortcut for UniqueConstraint
+    @Column(name = "email", unique = true)//"unique" can be used as a shortcut for UniqueConstraint
     private String email;
     @NotBlank
     @Column(name = "password")
@@ -41,8 +40,7 @@ public class Customer {
     //@Max(value = 16, message = "Password is over 16 chars")
     private String password;
     @Column
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    //EAGER to create this list as soon as possible
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)//EAGER to create this list as soon as possible
     private List<Coupon> coupons = new ArrayList<>();
 
     //empty con for hibernate

@@ -30,7 +30,7 @@ public class AdminFacade extends ClientFacade {
         companyDB.updateCompany(company);
     }
 
-    public List<Company> findAllCompanies() {
+    public List<Company> getAllCompanies() {
         return companyDB.getAllCompanies();
     }
 

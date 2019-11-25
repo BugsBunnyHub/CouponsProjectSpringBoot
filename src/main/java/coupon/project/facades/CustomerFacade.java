@@ -63,4 +63,8 @@ public class CustomerFacade extends ClientFacade {
         return true;
     }
 
+    public Customer getCustomerDetails() {
+        return customerDB.findOneCustomer(customerId);
+    }
+
 }

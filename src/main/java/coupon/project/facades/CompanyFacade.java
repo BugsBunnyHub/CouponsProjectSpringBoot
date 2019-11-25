@@ -63,6 +63,10 @@ public class CompanyFacade extends ClientFacade {
     public Coupon getOneCoupon(int id) {
         return couponDB.getOneCoupon(id);
     }
+
+    public Company getCompanyDetails() {
+        return companyDB.findOneCompany(companyId);
+    }
 }
 
 

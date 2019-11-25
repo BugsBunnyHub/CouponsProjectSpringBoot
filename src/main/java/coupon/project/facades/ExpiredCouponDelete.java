@@ -61,6 +61,7 @@ public class ExpiredCouponDelete implements Runnable {
                 }
                 //remove the trash bin
                 for (Coupon removeList : trashBin) {
+                    System.out.println("Coupon removed: " + "ID:" + removeList.getId() + " " + "Title:" + removeList.getTitle());
                     coupDB.deleteCoupon(removeList.getId());
                     trashBin.remove(removeList);
                 }

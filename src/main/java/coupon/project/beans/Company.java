@@ -17,9 +17,8 @@ import java.util.List;
 @Scope("prototype") //can create many companies
 public class Company {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    //GeneratedValue is used to specify how the primary key should be
-    //generated ex: ID:1...2...3
+    @GeneratedValue(strategy = GenerationType.IDENTITY)//GeneratedValue is used to specify how the primary key should be
+    //mapped, GenerationType.IDENTITY ex: ID: 1...2...3
     private int id;
     @NotBlank
     @Column(name = "name", unique = true) //"unique" can be used as a shortcut for UniqueConstraint
@@ -39,7 +38,6 @@ public class Company {
     // referenced from the "parent" entity, e.g. when you remove the child entity from the corresponding collection of
     // the parent entity
     //Cascade for auto delete coupons and other related obj
-
     private List<Coupon> coupons = new ArrayList<>();
 
     //empty con for hibernate
@@ -58,7 +56,6 @@ public class Company {
         this.email = email;
         this.password = password;
     }
-
 
     public int getId() {
         return id;
