@@ -19,12 +19,13 @@ public class CompanyDBDAO {
         this.companyRepo.save(company);
     }
 
-    public void updateCompany(Company company) throws companyNotFoundException {
+    public Company updateCompany(Company company) throws companyNotFoundException {
         if (companyRepo.existsById(company.getId())) {
             companyRepo.save(company);
         } else {
             throw new companyNotFoundException();
         }
+        return company;
     }
 
     public void deleteCompany(int id) {

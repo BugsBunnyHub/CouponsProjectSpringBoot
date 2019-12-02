@@ -26,16 +26,16 @@ public class AdminFacade extends ClientFacade {
         companyDB.deleteCompany(id);
     }
 
-    public void updateCompany(Company company) throws companyNotFoundException {
-        companyDB.updateCompany(company);
+    public Company updateCompany(Company company) throws companyNotFoundException {
+        return companyDB.updateCompany(company);
     }
 
     public List<Company> getAllCompanies() {
         return companyDB.getAllCompanies();
     }
 
-    public void findOneCompany(int id) {
-        companyDB.findOneCompany(id);
+    public Company findOneCompany(int id) {
+        return companyDB.findOneCompany(id);
     }
 
     public Company isCompanyExists(String email, String password) {
@@ -62,8 +62,8 @@ public class AdminFacade extends ClientFacade {
         customerDB.deleteCustomer(id);
     }
 
-    public void updateCustomer(Customer customer) {
-        customerDB.updateCustomer(customer);
+    public Customer updateCustomer(Customer customer) {
+        return customerDB.updateCustomer(customer);
     }
 
     public List<Customer> getAllCustomers() {

@@ -18,9 +18,10 @@ public class CustomerDBDAO {
         customerRepo.save(customer);
     }
 
-    public void updateCustomer(Customer customer) {
+    public Customer updateCustomer(Customer customer) {
         if (customerRepo.existsById(customer.getId()))
             customerRepo.save(customer);
+        return customer;
     }
 
     public void deleteCustomer(int id) {
